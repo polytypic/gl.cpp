@@ -4,6 +4,7 @@
 
 #include "math3d_v1/mtx.hpp"
 
+#include "data_v1/strided_array.hpp"
 #include "data_v1/struct.hpp"
 
 #include <cstdio>
@@ -71,6 +72,13 @@ auto gl_v1::Resource<Deleter, deleter>::reset(GLuint new_name) {
 template <class T, size_t N>
 auto gl_v1::BufferData(Target target, const T (&data)[N], Usage usage) {
   BufferData(target, sizeof(T) * N, data, usage);
+}
+
+template <class T, size_t N>
+auto gl_v1::BufferData(Target target,
+                       const contiguous_array<T, N> &data,
+                       Usage usage) {
+  BufferData(target, sizeof(T) * data.size(), &data[0], usage);
 }
 
 //
