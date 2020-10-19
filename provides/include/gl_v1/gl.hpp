@@ -36,6 +36,9 @@ gl_v1::Resource<Deleter, deleter>::~Resource<Deleter, deleter>() {
 }
 
 template <class Deleter, Deleter deleter>
+gl_v1::Resource<Deleter, deleter>::Resource() : name(0) {}
+
+template <class Deleter, Deleter deleter>
 gl_v1::Resource<Deleter, deleter>::Resource(GLuint name) : name(name) {}
 
 template <class Deleter, Deleter deleter>

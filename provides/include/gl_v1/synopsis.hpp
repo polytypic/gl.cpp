@@ -41,6 +41,7 @@ template <class Deleter, Deleter deleter> struct Resource {
 
   ~Resource();
 
+  Resource();
   explicit Resource(GLuint name);
   Resource(Resource &&that);
 
