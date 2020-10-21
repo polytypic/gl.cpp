@@ -106,7 +106,7 @@ void BufferData(Target target, GLsizeiptr size, const void *data, Usage usage);
 template <class T, size_t N>
 auto BufferData(Target target, const T (&data)[N], Usage usage);
 template <class T, size_t N>
-auto BufferData(Target target, const contiguous_array<T, N> &data, Usage usage);
+auto BufferData(Target target, const contiguous<T, N> &data, Usage usage);
 
 //
 
