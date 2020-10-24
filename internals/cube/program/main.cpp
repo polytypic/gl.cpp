@@ -1,8 +1,7 @@
 #include "gl_v1/gl.hpp"
 
-#include "math3d_v1/mtx.hpp"
 #include "math3d_v1/transform.hpp"
-#include "math3d_v1/vec.hpp"
+#include "math3d_v1/trig.hpp"
 
 #include <cstddef>
 #include <cstdint>
@@ -65,7 +64,8 @@ EM_BOOL animation_frame(double time, void *context_void) {
   gl::Uniform(gl::GetUniformLocation(c.program, "view"), view);
   gl::Uniform(gl::GetUniformLocation(c.program, "view_inv_trn"), view);
 
-  mtx<float, 4> view_projection = make_projection<float>(45, 1, 9) * view;
+  mtx<float, 4> view_projection =
+      make_projection<float>(from_angle(45.0f), 1, 9) * view;
   gl::Uniform(gl::GetUniformLocation(c.program, "view_projection"),
               view_projection);
 
