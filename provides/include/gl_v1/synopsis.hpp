@@ -128,6 +128,8 @@ auto VertexAttribPointer(Location index,
 //
 
 void Viewport(GLint x, GLint y, GLsizei width, GLsizei height);
+void Viewport(const vec<GLint, 2> &lower_left, const vec<GLsizei, 2> &extent);
+void Viewport(const vec<GLsizei, 2> &extent);
 
 //
 

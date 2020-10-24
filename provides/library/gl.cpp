@@ -1,5 +1,7 @@
 #include "gl_v1/gl.hpp"
 
+#include "math3d_v1/vec.hpp"
+
 #include <algorithm>
 #include <array>
 #include <cstdio>
@@ -214,6 +216,15 @@ void gl_v1::VertexAttribPointer(Location index,
 void gl_v1::Viewport(GLint x, GLint y, GLsizei width, GLsizei height) {
   glViewport(x, y, width, height);
   CheckError("glViewPort");
+}
+
+void gl_v1::Viewport(const vec<GLint, 2> &lower_left,
+                     const vec<GLsizei, 2> &extent) {
+  Viewport(lower_left[0], lower_left[1], extent[0], extent[1]);
+}
+
+void gl_v1::Viewport(const vec<GLsizei, 2> &extent) {
+  Viewport(zero_vec<GLint, 2>(), extent);
 }
 
 void gl_v1::Clear(Mask mask) {
