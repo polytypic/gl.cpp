@@ -1,5 +1,10 @@
+if(NOT EMSCRIPTEN)
+  message(WARNING "`gl_v1` library currently requires Emscripten.")
+  return()
+endif()
+
 add_conventional_executable(cube)
-target_link_libraries(cube PRIVATE gl_v1 emscripten_system_include)
+target_link_libraries(cube PRIVATE gl_v1)
 target_link_options(cube PUBLIC
   "SHELL:-s USE_WEBGL2=1"
   "SHELL:-s MIN_WEBGL_VERSION=2"
