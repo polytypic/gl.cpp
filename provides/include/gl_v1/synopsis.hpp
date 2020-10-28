@@ -106,7 +106,7 @@ void BufferData(Target target, GLsizeiptr size, const void *data, Usage usage);
 template <class T, size_t N>
 auto BufferData(Target target, const T (&data)[N], Usage usage);
 template <class T, size_t N>
-auto BufferData(Target target, const contiguous<T, N> &data, Usage usage);
+auto BufferData(Target target, const contiguous_t<T, N> &data, Usage usage);
 
 //
 
@@ -122,14 +122,15 @@ void VertexAttribPointer(Location index,
                          const void *pointer);
 template <class Vertex, class S, size_t N>
 auto VertexAttribPointer(Location index,
-                         vec<S, N>(Vertex::*member),
+                         vec_t<S, N>(Vertex::*member),
                          GLboolean normalized = false);
 
 //
 
 void Viewport(GLint x, GLint y, GLsizei width, GLsizei height);
-void Viewport(const vec<GLint, 2> &lower_left, const vec<GLsizei, 2> &extent);
-void Viewport(const vec<GLsizei, 2> &extent);
+void Viewport(const vec_t<GLint, 2> &lower_left,
+              const vec_t<GLsizei, 2> &extent);
+void Viewport(const vec_t<GLsizei, 2> &extent);
 
 //
 
@@ -159,11 +160,11 @@ void DrawElements(Mode mode, GLsizei count, Type type, const void *indices);
 //
 
 void Uniform(GLint location,
-             const mtx<float, 4> &matrix,
+             const mtx_t<float, 4> &matrix,
              bool transpose = true);
 
-void Uniform(GLint location, const vec<GLfloat, 3> &vec);
-void Uniform(GLint location, const vec<GLfloat, 4> &vec);
+void Uniform(GLint location, const vec_t<GLfloat, 3> &vec);
+void Uniform(GLint location, const vec_t<GLfloat, 4> &vec);
 
 //
 

@@ -13,12 +13,12 @@ using namespace math3d_v1;
 using namespace data_v1;
 namespace gl = gl_v1;
 
-struct vertex {
-  vec<GLfloat, 3> position;
-  vec<GLfloat, 3> normal;
+struct vertex_t {
+  vec_t<GLfloat, 3> position;
+  vec_t<GLfloat, 3> normal;
 };
 
-static const vertex vertices[] = {
+static const vertex_t vertices[] = {
     {{-1, -1, -1}, {0, 0, -1}}, {{+1, -1, -1}, {0, 0, -1}},
     {{-1, +1, -1}, {0, 0, -1}}, {{+1, +1, -1}, {0, 0, -1}},
 
@@ -57,15 +57,14 @@ EM_BOOL animation_frame(double time, void *context_void) {
   gl::ClearColor(0, 0, 0, 1);
   gl::Clear(gl::COLOR_BUFFER_BIT);
 
-  mtx<float, 4> view = make_translation(vec<float, 3>{0, 0, -5}) *
-                       make_rotation(fmodf(time * 0.0009, pi * 2), 1) *
-                       make_rotation(fmodf(time * -0.001, pi * 2), 0);
+  auto view = translation(vec(0.0f, 0.0f, -5.0f)) *
+              rotation(fmodf(time * 0.0009f, pi * 2), 1) *
+              rotation(fmodf(time * -0.001f, pi * 2), 0);
 
   gl::Uniform(gl::GetUniformLocation(c.program, "view"), view);
   gl::Uniform(gl::GetUniformLocation(c.program, "view_inv_trn"), view);
 
-  mtx<float, 4> view_projection =
-      make_projection<float>(from_angle(45.0f), 1, 9) * view;
+  auto view_projection = perspective<float>(from_angle(45.0f), 1, 9) * view;
   gl::Uniform(gl::GetUniformLocation(c.program, "view_projection"),
               view_projection);
 
@@ -132,13 +131,13 @@ int main() {
 
   auto position_loc = gl::GetAttribLocation(program, "position");
   gl::EnableVertexAttribArray(position_loc);
-  gl::VertexAttribPointer(position_loc, &vertex::position);
+  gl::VertexAttribPointer(position_loc, &vertex_t::position);
 
   auto normal_loc = gl::GetAttribLocation(program, "normal");
   gl::EnableVertexAttribArray(normal_loc);
-  gl::VertexAttribPointer(normal_loc, &vertex::normal);
+  gl::VertexAttribPointer(normal_loc, &vertex_t::normal);
 
-  gl::Uniform(gl::GetUniformLocation(program, "color"), vec<float, 3>{1, 1, 1});
+  gl::Uniform(gl::GetUniformLocation(program, "color"), vec(1.0f, 1.0f, 1.0f));
 
   gl::Enable(gl::CULL_FACE);
 

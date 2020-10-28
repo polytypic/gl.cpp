@@ -1,6 +1,6 @@
 #include "gl_v1/gl.hpp"
 
-#include "math3d_v1/vec.hpp"
+#include "math3d_v1/mtx.hpp"
 
 #include <algorithm>
 #include <array>
@@ -218,12 +218,12 @@ void gl_v1::Viewport(GLint x, GLint y, GLsizei width, GLsizei height) {
   CheckError("glViewPort");
 }
 
-void gl_v1::Viewport(const vec<GLint, 2> &lower_left,
-                     const vec<GLsizei, 2> &extent) {
+void gl_v1::Viewport(const vec_t<GLint, 2> &lower_left,
+                     const vec_t<GLsizei, 2> &extent) {
   Viewport(lower_left[0], lower_left[1], extent[0], extent[1]);
 }
 
-void gl_v1::Viewport(const vec<GLsizei, 2> &extent) {
+void gl_v1::Viewport(const vec_t<GLsizei, 2> &extent) {
   Viewport(zero_vec<GLint, 2>(), extent);
 }
 
@@ -250,18 +250,18 @@ void gl_v1::DrawElements(Mode mode,
 //
 
 void gl_v1::Uniform(GLint location,
-                    const mtx<float, 4> &matrix,
+                    const mtx_t<float, 4> &matrix,
                     bool transpose) {
   glUniformMatrix4fv(location, 1, transpose, matrix.values[0]);
   CheckError("glUniformMatrix4fv");
 }
 
-void gl_v1::Uniform(GLint location, const vec<GLfloat, 3> &vec) {
+void gl_v1::Uniform(GLint location, const vec_t<GLfloat, 3> &vec) {
   glUniform3fv(location, 1, vec.values);
   CheckError("glUniform3fv");
 }
 
-void gl_v1::Uniform(GLint location, const vec<GLfloat, 4> &vec) {
+void gl_v1::Uniform(GLint location, const vec_t<GLfloat, 4> &vec) {
   glUniform4fv(location, 1, vec.values);
   CheckError("glUniform4fv");
 }

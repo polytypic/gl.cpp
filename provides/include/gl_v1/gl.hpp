@@ -2,7 +2,7 @@
 
 #include "gl_v1/synopsis.hpp"
 
-#include "math3d_v1/mtx.hpp"
+#include "math3d_v1/vec.hpp"
 
 #include "data_v1/strided.hpp"
 #include "data_v1/struct.hpp"
@@ -76,7 +76,7 @@ auto gl_v1::BufferData(Target target, const T (&data)[N], Usage usage) {
 
 template <class T, size_t N>
 auto gl_v1::BufferData(Target target,
-                       const contiguous<T, N> &data,
+                       const contiguous_t<T, N> &data,
                        Usage usage) {
   BufferData(target, sizeof(T) * data.size(), &data[0], usage);
 }
@@ -85,7 +85,7 @@ auto gl_v1::BufferData(Target target,
 
 template <class Vertex, class S, size_t N>
 auto gl_v1::VertexAttribPointer(Location index,
-                                vec<S, N>(Vertex::*member),
+                                vec_t<S, N>(Vertex::*member),
                                 GLboolean normalized) {
   auto pointer = pointer_of(member);
   auto size = N;
